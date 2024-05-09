@@ -44,6 +44,12 @@ if __DISTILLER == nil then
         package.loaded[id] = func(__DISTILLER.require) or true
         return package.loaded[id]
       end
+      local id_ = string.gsub(id, "%.", "/")
+      if __DISTILLER.FACTORIES[id_] then
+        local func = __DISTILLER.FACTORIES[id_]
+        package.loaded[id_] = func(__DISTILLER.require) or true
+        return package.loaded[id_]
+      end
       return __DISTILLER.__nativeRequire(id)
     end,
     define = function(self, id, factory)
