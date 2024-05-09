@@ -41,7 +41,6 @@ if __DISTILLER == nil then
         return package.loaded[id]
       end
       if package.loaded[id_] ~= nil then
-        print("命中"..id)
         return package.loaded[id_]
       end
       if __DISTILLER.FACTORIES[id] then
