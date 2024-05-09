@@ -36,15 +36,19 @@ if __DISTILLER == nil then
     __nativeRequire = require,
     require = function(id)
       assert(type(id) == "string", "require invalid id:" .. tostring(id))
+      local id_ = string.gsub(id, "%.", "/")
       if package.loaded[id] then
         return package.loaded[id]
+      end
+      if package.loaded[id_] ~= nil then
+        print("命中"..id)
+        return package.loaded[id_]
       end
       if __DISTILLER.FACTORIES[id] then
         local func = __DISTILLER.FACTORIES[id]
         package.loaded[id] = func(__DISTILLER.require) or true
         return package.loaded[id]
       end
-      local id_ = string.gsub(id, "%.", "/")
       if __DISTILLER.FACTORIES[id_] then
         local func = __DISTILLER.FACTORIES[id_]
         package.loaded[id_] = func(__DISTILLER.require) or true
