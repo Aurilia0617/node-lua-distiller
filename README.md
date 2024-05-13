@@ -9,7 +9,10 @@
 ## Install 安装
 
 ```bash
-npm install coffee-script lua-distiller -g
+npm install coffee-script -g
+cd node-lua-distiller
+npm install
+npm link
 ```
 
 [LuaSrcDiet][] 是可选依赖。如果如果需要 minify 功能，
